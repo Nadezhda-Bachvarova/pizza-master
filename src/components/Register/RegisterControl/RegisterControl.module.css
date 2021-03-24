@@ -1,0 +1,39 @@
+.RegisterControl {
+    background-color: rgb(233, 199, 199);
+    padding: 30px;
+    margin: 20px auto;
+    width: 80%;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 3px gray;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.RegisterControl h3 {
+    text-decoration: underline solid  #690606;
+    text-underline-offset: 0.3rem;
+}
+
+.RegisterControl p input {
+    background-color: rgb(247, 241, 241);
+    padding: 10px 10px;
+    margin: 10px auto;
+    box-shadow: none;
+    border-color: white;
+}
+
+.RegisterControl button {
+    padding: 10px 20px;
+    color: white;
+    border-radius: 12px;
+    border-color: #bd4c4c;
+    margin: 10px;
+}
+
+.Signup {
+    background-color: #bd4c4c;
+}
+
+.Signin {
+    background-color: #a33333;
+}
