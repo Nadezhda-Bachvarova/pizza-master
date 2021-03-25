@@ -1,0 +1,208 @@
+.Pizza {
+    width: 100vh;
+    height: 100vh;
+    margin: auto;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.Crust {
+    margin: auto;
+    box-sizing: border-box;
+    position: relative;
+    background: #e6bf70;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    border: 25px solid #e0b152;
+    border-radius: 500px;
+    display: flex;
+}
+
+.Cheese {
+    height: 95%;
+    width: 95%;
+    margin: auto;
+    border-radius: inherit;
+    background: #fff100;
+}
+
+.Pepperoni {
+    width: 20%;
+    background: linear-gradient(#fd3400,#a50000);
+    height: 20%;
+    border-radius: 200px;
+    position: absolute;
+}
+
+.Pepperoni:before {
+    content: "\2022  \2022";
+    font-size: 400%;
+    transform: rotatez(60deg);
+    position: absolute;
+    left: 5%;
+    top: 25%;
+    color: #ff7070;
+}
+
+.Pepperoni:after {
+    content: "\2022";
+    font-size: 400%;
+    transform: rotatez(140deg);
+    position: absolute;
+    left: 58%;
+    top: -5%;
+    color: #ff7070;
+}
+
+.Mushroom {
+    position: absolute;
+    width: 10%;
+    height: 11%;
+    border-radius: 12px;
+    background: #d6d6d6;
+}
+
+.Mushroom:before {
+    content: "";
+    width: 150%;
+    left: -25%;
+    height: 70%;
+    border-radius: 50px;
+    top: -15px;
+    position: absolute;
+    background: linear-gradient(#d6d6d6,#b5b5b5);
+}
+
+.Olive {
+    width: 2%;
+    height: 3%;
+    border: 18px solid black;
+    border-radius: 50px;
+    position: absolute;
+}
+
+.Oregano {
+    background: linear-gradient(green,#00d200);
+    position: absolute;
+    width: 8%;
+    height: 2%;
+    border-radius: 10px;
+}
+
+/* Topping positions */
+
+.Topping-1 {
+    left: 16%;
+    top: 35%;
+    transform: rotateZ(15deg);
+}
+
+.Topping-2 {
+    left: 70%;
+    top: 45%;
+    transform: rotateZ(235deg);
+}
+
+.Topping-3 {
+    left: 30%;
+    top: 70%;
+    transform: rotateZ(160deg);
+}
+
+.Topping-4 {
+    left: 50%;
+    top: 15%;
+    transform: rotateZ(30deg);
+}
+
+.Topping-5 {
+    left: 45%;
+    top: 50%;
+    transform: rotateZ(30deg);
+}
+
+.Topping-6 {
+    left: 75%;
+    top: 30%;
+    transform: rotateZ(160deg);
+}
+
+.Topping-7 {
+    left: 25%;
+    top: 66%;
+    transform: rotateZ(235deg);
+}
+
+.Topping-8 {
+    left: 25%;
+    top: 15%;
+    transform: rotateZ(105deg);
+}
+
+.Topping-9 {
+    left: 60%;
+    top: 65%;
+    transform: rotateZ(310deg);
+}
+
+.Topping-10 {
+    left: 15%;
+    top: 30%;
+    transform: rotateZ(105deg);
+}
+
+.Topping-11 {
+    left: 60%;
+    top: 30%;
+    transform: rotateZ(20deg);
+}
+
+.Topping-12 {
+    left: 40%;
+    top: 50%;
+    transform: rotateZ(110deg);
+}
+
+.Topping-13 {
+    left: 12%;
+    top: 50%;
+    transform: rotateZ(330deg);
+}
+
+.Topping-14 {
+    left: 40%;
+    top: 75%;
+    transform: rotateZ(230deg);
+}
+
+.Topping-15 {
+    left: 70%;
+    top: 50%;
+    transform: rotateZ(160deg);
+}
+
+.Topping-16 {
+    left: 85%;
+    top: 30%;
+    transform: rotateZ(260deg);
+}
+
+.Topping-17 {
+    left: 40%;
+    top: 60%;
+    transform: rotateZ(30deg);
+}
+
+.Topping-18 {
+    left: 37%;
+    top: 30%;
+    transform: rotateZ(310deg);
+}
+
+.Topping-19 {
+    left: 55%;
+    top: 85%;
+    transform: rotateZ(120deg);
+}
