@@ -6,12 +6,12 @@ const createPizzaControl = (props) => (
     <div className={classes.CreatePizzaControl}>
         <div className={classes.Label}>{props.label}</div>
         <button 
-            className={classes.Less} 
+            className={classes.Remove} 
             onClick={props.removed} 
-            disabled={props.disabled}>Less</button>
+            disabled={props.disabled}>-</button>
         <button 
-            className={classes.More} 
-            onClick={props.added}>More</button>
+            className={classes.Add} 
+            onClick={props.added}>+</button>
     </div>
 )
 

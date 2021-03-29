@@ -4,11 +4,10 @@ import CreatePizzaControl from './CreatePizzaControl/CreatePizzaControl';
 import classes from './CreatePizzaControls.module.css';
 
 const controls = [
-    { label: 'Cheese', type: 'cheese' },
     { label: 'Pepperoni', type: 'pepperoni'},
     { label: 'Mushroom', type: 'mushroom'},
     { label: 'Olive', type: 'olive'},
-    { label: 'Origano', type: 'origano'}
+    { label: 'Oregano', type: 'oregano'}
 ]
 
 const createPizzaControls = (props) => (

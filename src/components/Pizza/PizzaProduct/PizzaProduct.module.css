@@ -1,6 +1,6 @@
 .Pizza {
-    width: 100vh;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     margin: auto;
     padding: 5px;
     box-sizing: border-box;
@@ -13,8 +13,8 @@
     background: #e6bf70;
     width: 100%;
     height: 100%;
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 550px;
+    max-height: 550px;
     border: 25px solid #e0b152;
     border-radius: 500px;
     display: flex;
@@ -32,7 +32,7 @@
     width: 20%;
     background: linear-gradient(#fd3400,#a50000);
     height: 20%;
-    border-radius: 200px;
+    border-radius: 100px;
     position: absolute;
 }
 
@@ -49,10 +49,10 @@
 .Pepperoni:after {
     content: "\2022";
     font-size: 400%;
-    transform: rotatez(140deg);
+    transform: rotatez(40deg);
     position: absolute;
     left: 58%;
-    top: -5%;
+    top: -15%;
     color: #ff7070;
 }
 
@@ -91,117 +91,115 @@
     border-radius: 10px;
 }
 
-/* Topping positions */
-
-.Topping-1 {
+.ToppingPepperoniA {
     left: 16%;
     top: 35%;
     transform: rotateZ(15deg);
 }
 
-.Topping-2 {
+.ToppingPepperoniB {
     left: 70%;
     top: 45%;
     transform: rotateZ(235deg);
 }
 
-.Topping-3 {
+.ToppingPepperoniC {
     left: 30%;
     top: 70%;
     transform: rotateZ(160deg);
 }
 
-.Topping-4 {
+.ToppingPepperoniD {
     left: 50%;
     top: 15%;
     transform: rotateZ(30deg);
 }
 
-.Topping-5 {
+.ToppingMushroomA {
     left: 45%;
     top: 50%;
     transform: rotateZ(30deg);
 }
 
-.Topping-6 {
+.ToppingMushroomB {
     left: 75%;
     top: 30%;
     transform: rotateZ(160deg);
 }
 
-.Topping-7 {
+.ToppingMushroomC {
     left: 25%;
     top: 66%;
     transform: rotateZ(235deg);
 }
 
-.Topping-8 {
+.ToppingMushroomD {
     left: 25%;
     top: 15%;
     transform: rotateZ(105deg);
 }
 
-.Topping-9 {
+.ToppingOliveA {
     left: 60%;
     top: 65%;
     transform: rotateZ(310deg);
 }
 
-.Topping-10 {
+.ToppingOliveB {
     left: 15%;
     top: 30%;
     transform: rotateZ(105deg);
 }
 
-.Topping-11 {
+.ToppingOliveC {
     left: 60%;
     top: 30%;
     transform: rotateZ(20deg);
 }
 
-.Topping-12 {
+.ToppingOliveD {
     left: 40%;
     top: 50%;
     transform: rotateZ(110deg);
 }
 
-.Topping-13 {
+.ToppingOreganoA {
     left: 12%;
     top: 50%;
     transform: rotateZ(330deg);
 }
 
-.Topping-14 {
+.ToppingOreganoB {
     left: 40%;
     top: 75%;
     transform: rotateZ(230deg);
 }
 
-.Topping-15 {
+.ToppingOreganoC {
     left: 70%;
     top: 50%;
     transform: rotateZ(160deg);
 }
 
-.Topping-16 {
+.ToppingOreganoD {
     left: 85%;
     top: 30%;
     transform: rotateZ(260deg);
 }
 
-.Topping-17 {
+.ToppingOreganoE {
     left: 40%;
     top: 60%;
     transform: rotateZ(30deg);
 }
 
-.Topping-18 {
+.ToppingOreganoF {
     left: 37%;
     top: 30%;
     transform: rotateZ(310deg);
 }
 
-.Topping-19 {
+.ToppingOreganoG {
     left: 55%;
     top: 85%;
     transform: rotateZ(120deg);

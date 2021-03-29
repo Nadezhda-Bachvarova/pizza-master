@@ -6,22 +6,20 @@ import CreatePizzaControls from '../../components/Pizza/CreatePizzaControls/Crea
 import Modal from '../../components/UI/Modal/Modal';
 import Order from '../../components/Pizza/Order/Order';
 
-const INGREDIENT_PRICES = {
-    cheese: 1.10,
+const PRODUCT_PRICES = {
     pepperoni: 1.40,
     mushroom: 0.90,
     olive: 0.70,
-    origano: 0.20
+    oregano: 0.20
 };
 
 class PizzaCreator extends Component {
     state = {
         products: {
-            cheese: 0,
             pepperoni: 0,
             mushroom: 0,
             olive: 0,
-            origano: 0
+            oregano: 0
         },
         totalPrice: 5,
         purchasable: false,
@@ -39,35 +37,36 @@ class PizzaCreator extends Component {
         this.setState( { purchasable: sum > 0 } );
     }
 
-    addIngredientHandler = ( type ) => {
+    addProductHandler = ( type ) => {
         const oldCount = this.state.products[type];
-        const updatedCount = oldCount + 1;
-        const updatedIngredients = {
-            ...this.state.products
-        };
-        updatedIngredients[type] = updatedCount;
-        const priceAddition = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
-        this.setState( { totalPrice: newPrice, products: updatedIngredients } );
-        this.updatePurchaseState(updatedIngredients);
+        if (this.state.products[type] === 0) {
+            const updatedCount = oldCount + 1;
+            const updatedProducts = {
+                ...this.state.products
+            };
+            updatedProducts[type] = updatedCount;
+            const oldPrice = this.state.totalPrice;
+            const newPrice = oldPrice + PRODUCT_PRICES[type];
+            this.setState( { totalPrice: newPrice, products: updatedProducts } );
+            this.updatePurchaseState(updatedProducts);
+        }
     }
 
-    removeIngredientHandler = ( type ) => {
+    removeProductHandler = ( type ) => {
         const oldCount = this.state.products[type];
         if ( oldCount <= 0 ) {
             return;
         }
         const updatedCount = oldCount - 1;
-        const updatedIngredients = {
+        const updatedProducts = {
             ...this.state.products
         };
-        updatedIngredients[type] = updatedCount;
-        const priceDeduction = INGREDIENT_PRICES[type];
+        updatedProducts[type] = updatedCount;
+        const priceDeduction = PRODUCT_PRICES[type];
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice - priceDeduction;
-        this.setState( { totalPrice: newPrice, products: updatedIngredients } );
-        this.updatePurchaseState(updatedIngredients);
+        this.setState( { totalPrice: newPrice, products: updatedProducts } );
+        this.updatePurchaseState(updatedProducts);
     }
 
     purchaseHandler = () => {
@@ -101,8 +100,8 @@ class PizzaCreator extends Component {
                 </Modal>
                 <Pizza products={this.state.products} />
                 <CreatePizzaControls
-                    ingredientAdded={this.addIngredientHandler}
-                    ingredientRemoved={this.removeIngredientHandler}
+                    ingredientAdded={this.addProductHandler}
+                    ingredientRemoved={this.removeProductHandler}
                     disabled={disabledInfo}
                     purchasable={this.state.purchasable}
                     ordered={this.purchaseHandler}
