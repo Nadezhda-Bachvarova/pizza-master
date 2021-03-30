@@ -1,8 +1,6 @@
-# Getting Started with Create React App
+# ReactJS Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## Animated pizza restaurant "Master"
 
 In the project directory, you can run:
 
