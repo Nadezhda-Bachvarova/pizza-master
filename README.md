@@ -1,6 +1,7 @@
 # ReactJS Project
 
-> ## *_Theme_* Animated pizza restaurant "Master"
+## Theme: Animated pizza restaurant "Master"
+## Type: E-commerce site
 
 
 Design and implement a web application using React.js. It's used service for back-end Firebase - **valid Raltime Database until 2021/04/28**
