@@ -5,6 +5,9 @@ import Pizza from '../../components/Pizza/Pizza';
 import CreatePizzaControls from '../../components/Pizza/CreatePizzaControls/CreatePizzaControls';
 import Modal from '../../components/UI/Modal/Modal';
 import Order from '../../components/Pizza/Order/Order';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import axios from '../../axios-orders';
 
 const PRODUCT_PRICES = {
     pepperoni: 1.40,
@@ -22,8 +25,9 @@ class PizzaCreator extends Component {
             oregano: 0
         },
         totalPrice: 5,
-        purchasable: false,
-        purchasing: false
+        purchasable: false, purchasing: false,
+        purchasing: false, purchasing: false,
+        loading: false, purchasing: false
     }
 
     updatePurchaseState (products) {
@@ -74,11 +78,32 @@ class PizzaCreator extends Component {
     }
 
     purchaseCancelHandler = () => {
-        this.setState({purchasing: false});
+        this.setState({purchasing: false, purchasing: false});
     }
 
     purchaseContinueHandler = () => {
-        alert('You continue!');
+        this.setState({loading: true});
+        const orderInformation = {
+            products: this.state.products,
+            price: this.state.totalPrice, 
+            customer: {
+                name: 'Nadezhda',
+                adress: {
+                    street: 'Mladost',
+                    postCode: '1784',
+                    city: 'Sofia'
+                },
+                email: 'test@test.com'
+            },
+            payMethod: 'cash'
+        }
+        axios.post('/orders.json', orderInformation)
+            .then(response => {
+                this.setState({loading: false, purchasing: false});
+            })
+            .catch(error => {
+                this.setState({loading: false, purchasing: false});
+            });
     }
 
     render () {
@@ -88,15 +113,21 @@ class PizzaCreator extends Component {
         for ( let key in disabledInfo ) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
+
+        let order = <Order
+            products={this.state.products}
+            price={this.state.totalPrice.toFixed(2)}
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler} />
+
+        if ( this.state.loading) {
+            order = <Spinner/>
+        }
         
         return (
             <Aux>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-                    <Order
-                        products={this.state.products}
-                        price={this.state.totalPrice}
-                        purchaseCancelled={this.purchaseCancelHandler}
-                        purchaseContinued={this.purchaseContinueHandler} />
+                    {order}
                 </Modal>
                 <Pizza products={this.state.products} />
                 <CreatePizzaControls
@@ -111,4 +142,4 @@ class PizzaCreator extends Component {
     }
 }
 
-export default PizzaCreator;
+export default withErrorHandler(PizzaCreator, axios);

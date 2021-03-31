@@ -19,7 +19,7 @@ const ordery = (props) => {
             <ul>
                 {productSummary}
             </ul>
-            <p><strong>Total Price: {props.price.toFixed( 2 )}</strong></p>
+            <p><strong>Total Price: {props.price} lv</strong></p>
             <p>Finish order?</p>
             <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
             <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
