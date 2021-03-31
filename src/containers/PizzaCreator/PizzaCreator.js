@@ -25,9 +25,9 @@ class PizzaCreator extends Component {
             oregano: 0
         },
         totalPrice: 5,
-        purchasable: false, purchasing: false,
-        purchasing: false, purchasing: false,
-        loading: false, purchasing: false
+        purchasable: false,
+        purchasing: false,
+        loading: false,
     }
 
     updatePurchaseState (products) {
@@ -78,7 +78,7 @@ class PizzaCreator extends Component {
     }
 
     purchaseCancelHandler = () => {
-        this.setState({purchasing: false, purchasing: false});
+        this.setState({purchasing: false});
     }
 
     purchaseContinueHandler = () => {
