@@ -10,13 +10,14 @@ import {
   Route
 } from "react-router-dom";
 class App extends Component {
+
   render () {
     return (
       <div>
         <Layout>
           <Switch>
             <Route exact path="/" component={PizzaCreator}/>
-            <Route path="/register" component={RegisterControl}/>
+            <Route path="/register" component={RegisterControl}/> 
             <Route path="/login" component={LoginControl}/>
           </Switch>
         </Layout>     

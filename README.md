@@ -1,3 +1,5 @@
+> The Project is in mode: **TODO**. It's part from Front-End module at Software University.
+>> Public defense is forthcoming 11/04/2021.
 # ReactJS Project
 
 ## Theme: Animated pizza restaurant "Master"
