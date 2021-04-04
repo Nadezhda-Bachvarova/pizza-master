@@ -10,7 +10,8 @@ Design and implement a web application using:
  * React.js: "17.0.2";
  * Redux: "4.0.5";
  * React-redux: "7.2.3";
- * Prop-Types: "15.7.2;  
+ * Prop-Types: "15.7.2; 
+ * Redux-thunk: "2.3.0";
 
 It's used service for back-end Firebase - **valid Realtime Database until 2021/04/28**
 
