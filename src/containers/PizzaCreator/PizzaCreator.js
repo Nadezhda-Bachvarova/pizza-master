@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Aux from '../../hoc/Aux/Aux';
 import Pizza from '../../components/Pizza/Pizza';
@@ -8,9 +9,6 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderInformation from '../../components/Pizza/OrderInformation/OrderInformation';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
-import axios from '../../axios-orders';
-
-
 
 class PizzaCreator extends Component {
     state = {
@@ -34,24 +32,21 @@ class PizzaCreator extends Component {
     }
 
     purchaseHandler = () => {
-        this.setState({ purchasing: true });
+        if (this.props.isAuthenticated) {
+            this.setState( { purchasing: true } );
+        } else {
+            this.props.onSetLoginRedirectPath('/checkout');
+            this.props.history.push('/login');
+        }
     }
 
     purchaseCancelHandler = () => {
-        this.setState({ purchasing: false });
+        this.setState( { purchasing: false } );
     }
 
     purchaseContinueHandler = () => {
-        const queryParams = [];
-        for ( let i in this.state.products) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.products[i]));
-        }
-        queryParams.push('price=' + this.state.totalPrice);
-        const queryString = queryParams.join('&');
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString
-        });
+        this.props.onInitPurchase();
+        this.props.history.push('/checkout');
     }
 
     render() {
@@ -63,29 +58,27 @@ class PizzaCreator extends Component {
         }
 
         let order = null;
-        if (this.state.loading) {
-            order = <Spinner />
-        }
-
         let pizza = this.state.error ? <p>Products can't be loaded!</p> : <Spinner/>
-        if (this.state.products) {
+
+        if (this.props.products) {
             pizza = (
-            <Aux>
-                <Pizza products={this.state.products} />
-                <CreatePizzaControls
-                    ingredientAdded={this.addProductHandler}
-                    ingredientRemoved={this.removeProductHandler}
-                    disabled={disabledInfo}
-                    purchasable={this.state.purchasable}
-                    ordered={this.purchaseHandler}
-                    price={this.state.totalPrice} />
-            </Aux>
-        );
-        order = <OrderInformation
-            products={this.state.products}
-            price={this.state.totalPrice.toFixed(2)}
-            purchaseCancelled={this.purchaseCancelHandler}
-            purchaseContinued={this.purchaseContinueHandler} />
+                <Aux>
+                    <Pizza products={this.props.products} />
+                    <CreatePizzaControls
+                        ingredientAdded={this.props.onProductAdded}
+                        ingredientRemoved={this.props.onProductRemoved}
+                        disabled={disabledInfo}
+                        purchasable={this.updatePurchaseState(this.props.products)}
+                        ordered={this.purchaseHandler}
+                        isAuth={this.props.isAuthenticated}
+                        price={this.props.price} />
+                </Aux>
+            );
+            order = <OrderInformation
+                products={this.props.products}
+                price={this.props.price.toFixed(2)}
+                purchaseCancelled={this.purchaseCancelHandler}
+                purchaseContinued={this.purchaseContinueHandler} />
         }
 
         return (
@@ -104,7 +97,7 @@ const mapStateToProps = state => {
         products: state.pizzaCreator.products,
         price: state.pizzaCreator.totalPrice,
         error: state.pizzaCreator.error,
-        // isAuthenticated: state.auth.token !== null   -> login.token !== null
+        isAuthenticated: state.login.isAuthenticated  
     };
 }
 
@@ -114,8 +107,8 @@ const mapDispatchToProps = dispatch => {
         onProductRemoved: (productName) => dispatch(actions.removeProduct(productName)),
         onInitProducts: () => dispatch(actions.initProducts()),
         onInitPurchase: () => dispatch(actions.purchaseInit()),
-        // onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
+        onSetLoginRedirectPath: (path) => dispatch(actions.setLoginRedirectPath(path))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PizzaCreator);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PizzaCreator));

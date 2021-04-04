@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import classes from './NavigationItems.module.css';
 import NavidationItem from './NavigationItem/NavigationItem';
@@ -17,4 +18,4 @@ const navigationItems = (props) => (
     </ul>
 );
 
-export default navigationItems;
+export default withRouter( navigationItems);

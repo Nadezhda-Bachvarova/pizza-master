@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import classes from './RegisterControl.module.css';
 import Input from '../../../components/UI/Input/Input';
-import Spinner from '../../UI/Spinner/Spinner';
+// import Spinner from '../../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
-import * as actions from '../../../store/action/index';
-import { addUser } from '../../../store/action/users'
+import * as actions from '../../../store/actions/index';
 
 
 class RegisterControl extends Component {
@@ -196,7 +195,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addUser: user => dispatch(addUser(user))
+        addUser: user => dispatch(actions.addUser(user))
     }
 }
 

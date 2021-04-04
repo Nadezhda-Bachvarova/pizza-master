@@ -75,13 +75,16 @@ class LoginControl extends Component {
         event.preventDefault();
 
         let users = this.props.users
-        users.forEach(user => {
-            if(user.email === this.state.user.email.value && user.password === this.state.user.password.value) {
-                localStorage.setItem('user', JSON.stringify(user))
-                // set isAutenticated = true !!!
-                this.props.history.push('/')
-            }
-        });
+        if (users) {
+            users.forEach(user => {
+                if(user.email === this.state.user.email.value && user.password === this.state.user.password.value) {
+                    localStorage.setItem('user', JSON.stringify(user))
+                    // set isAutenticated = true !!!
+                    this.props.history.push('/')
+                }
+            })
+        }
+        
     };       
 
     render() {
@@ -125,7 +128,7 @@ class LoginControl extends Component {
 const mapStateToProps = state => {
     return {
         users: state.users,
-        // isAutenticated: state.isAutenticated
+        isAutenticated: state.login.isAutenticated
     }
 }
 
