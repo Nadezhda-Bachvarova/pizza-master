@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import classes from './LoginControl.module.css';
-// import * as actions from '../../../store/action/index';
+// import * as actions from '../../../store/actions/index';
 
-// import Spinner from '../../../UI/Spinner/Spinner';
-import Input from '../../UI/Input/Input';
+// import Spinner from '../../../components/UI/Spinner/Spinner';
+import Input from '../../../components/UI/Input/Input';
 
 
 class LoginControl extends Component {
@@ -78,8 +78,8 @@ class LoginControl extends Component {
         users.forEach(user => {
             if(user.email === this.state.user.email.value && user.password === this.state.user.password.value) {
                 localStorage.setItem('user', JSON.stringify(user))
-
-                this.props.history.push('/welcome')
+                // set isAutenticated = true !!!
+                this.props.history.push('/')
             }
         });
     };       
@@ -110,7 +110,7 @@ class LoginControl extends Component {
 
         return (
             <div className={classes.LoginControl}>
-            <button className={classes.Back} onClick={() => {this.props.history.push('/')}}>&larr;</button>
+            <button className={classes.Back} onClick={() => {this.props.history.push('/')}}>Back</button>
                 <form onSubmit={this.submitHandler}>
                     <h3>LOGIN</h3>
                         {form}
@@ -122,17 +122,16 @@ class LoginControl extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         users: state.users
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        users: state.users,
+        // isAutenticated: state.isAutenticated
+    }
+}
 
-// const mapDispatchToProps = dispatch => {
-//     return { 
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+    }
+}
 
-// export default  withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginControl));
-
-export default LoginControl;
+export default  withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginControl));

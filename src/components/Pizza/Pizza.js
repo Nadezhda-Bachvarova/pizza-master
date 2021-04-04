@@ -1,10 +1,11 @@
 import React from 'react';
-
+ 
 import classes from './Pizza.module.css';
 import classesProduct from './PizzaProduct/PizzaProduct.module.css';
 import PizzaProduct from './PizzaProduct/PizzaProduct';
 
 const pizza = (props) => {
+    console.log(props);
     let productPizzaTransform = Object.keys(props.products)
         .map(prodKey => {
             return [...Array(props.products[prodKey])].map((_, i) => {
@@ -29,7 +30,7 @@ const pizza = (props) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default pizza;

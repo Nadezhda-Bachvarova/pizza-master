@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import classes from './RegisterControl.module.css';
-import Input from '../../UI/Input/Input';
+import Input from '../../../components/UI/Input/Input';
 import Spinner from '../../UI/Spinner/Spinner';
-// import { connect } from 'react-redux';
-// import * as actions from '../../../store/action/index';
-// import { addUser } from '../../../store/action/users'
+import { connect } from 'react-redux';
+import * as actions from '../../../store/action/index';
+import { addUser } from '../../../store/action/users'
 
 
 class RegisterControl extends Component {
@@ -148,7 +148,7 @@ class RegisterControl extends Component {
         }
         this.props.addUser(user)
         this.signinHandler()
-        console.log('Users: ', this.props.users)
+        // console.log('Users: ', this.props.users)
     }
 
     signinHandler = () => {
@@ -188,18 +188,16 @@ class RegisterControl extends Component {
     };
 };
 
-// const mapStateToProps = state => {
-//     return {
-//         users: state.users
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        users: state.users
+    }
+}
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         addUser: user => dispatch(addUser(user))
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        addUser: user => dispatch(addUser(user))
+    }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(RegisterControl);
-
-export default RegisterControl;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterControl);

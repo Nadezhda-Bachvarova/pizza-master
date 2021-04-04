@@ -1,6 +1,6 @@
 import React from 'react';
-import CreatePizzaControl from './CreatePizzaControl/CreatePizzaControl';
 
+import CreatePizzaControl from './CreatePizzaControl/CreatePizzaControl';
 import classes from './CreatePizzaControls.module.css';
 
 const controls = [
@@ -8,7 +8,7 @@ const controls = [
     { label: 'Mushroom', type: 'mushroom'},
     { label: 'Olive', type: 'olive'},
     { label: 'Oregano', type: 'oregano'}
-]
+];
 
 const createPizzaControls = (props) => (
     <div className={classes.CreatePizzaControls}>
@@ -24,7 +24,7 @@ const createPizzaControls = (props) => (
         <button 
             className={classes.OrderButton}
             disabled={!props.purchasable}
-            onClick={props.ordered}>SEND YOUR ORDER</button>
+            onClick={props.ordered}>{props.isAuth ? 'SEND YOUR ORDER' : 'LOGIN TO ORDER'}</button>
     </div>
 );
 

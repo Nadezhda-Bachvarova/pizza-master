@@ -1,39 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Aux from '../../hoc/Aux/Aux';
 import Pizza from '../../components/Pizza/Pizza';
 import CreatePizzaControls from '../../components/Pizza/CreatePizzaControls/CreatePizzaControls';
 import Modal from '../../components/UI/Modal/Modal';
-import Order from '../../components/Pizza/Order/Order';
+import OrderInformation from '../../components/Pizza/OrderInformation/OrderInformation';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
-import Checkout from '../Checkout/Checkout';
 
-const PRODUCT_PRICES = {
-    pepperoni: 1.40,
-    mushroom: 0.90,
-    olive: 0.70,
-    oregano: 0.20,
-};
+
 
 class PizzaCreator extends Component {
     state = {
-        products: null,
-        totalPrice: 5,
-        purchasable: false,
-        purchasing: false,
-        loading: false,
-        error: false
+        purchasing: false
     }
 
     componentDidMount() {
-        axios.get('https://pizza-master-c580b-default-rtdb.europe-west1.firebasedatabase.app/products.json')
-            .then(response => {
-                this.setState({ products: response.data });
-            })
-            .catch(error => {
-                this.setState({error: true})
-            })
+        console.log(this.props); 
+        this.props.onInitProducts();    
     }
 
     updatePurchaseState(products) {
@@ -44,39 +30,7 @@ class PizzaCreator extends Component {
             .reduce((sum, el) => {
                 return sum + el;
             }, 0);
-        this.setState({ purchasable: sum > 0 });
-    }
-
-    addProductHandler = (type) => {
-        const oldCount = this.state.products[type];
-        if (this.state.products[type] === 0) {
-            const updatedCount = oldCount + 1;
-            const updatedProducts = {
-                ...this.state.products
-            };
-            updatedProducts[type] = updatedCount;
-            const oldPrice = this.state.totalPrice;
-            const newPrice = oldPrice + PRODUCT_PRICES[type];
-            this.setState({ totalPrice: newPrice, products: updatedProducts });
-            this.updatePurchaseState(updatedProducts);
-        }
-    }
-
-    removeProductHandler = (type) => {
-        const oldCount = this.state.products[type];
-        if (oldCount <= 0) {
-            return;
-        }
-        const updatedCount = oldCount - 1;
-        const updatedProducts = {
-            ...this.state.products
-        };
-        updatedProducts[type] = updatedCount;
-        const priceDeduction = PRODUCT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceDeduction;
-        this.setState({ totalPrice: newPrice, products: updatedProducts });
-        this.updatePurchaseState(updatedProducts);
+        return sum > 0;
     }
 
     purchaseHandler = () => {
@@ -88,28 +42,16 @@ class PizzaCreator extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({ loading: true });
-        const orderInformation = {
-            products: this.state.products,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Nadezhda',
-                adress: {
-                    street: 'Mladost',
-                    postCode: '1784',
-                    city: 'Sofia'
-                },
-                email: 'test@test.com'
-            },
-            payMethod: 'cash'
+        const queryParams = [];
+        for ( let i in this.state.products) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.products[i]));
         }
-        axios.post('/orders.json', orderInformation)
-            .then(response => {
-                this.setState({ loading: false, purchasing: false });
-            })
-            .catch(error => {
-                this.setState({ loading: false, purchasing: false });
-            });
+        queryParams.push('price=' + this.state.totalPrice);
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
 
     render() {
@@ -139,7 +81,7 @@ class PizzaCreator extends Component {
                     price={this.state.totalPrice} />
             </Aux>
         );
-        order = <Order
+        order = <OrderInformation
             products={this.state.products}
             price={this.state.totalPrice.toFixed(2)}
             purchaseCancelled={this.purchaseCancelHandler}
@@ -152,10 +94,28 @@ class PizzaCreator extends Component {
                     {order}
                 </Modal>
                 {pizza}
-                <Checkout/>
             </Aux>
         );
     }
 }
 
-export default PizzaCreator;
+const mapStateToProps = state => {
+    return {
+        products: state.pizzaCreator.products,
+        price: state.pizzaCreator.totalPrice,
+        error: state.pizzaCreator.error,
+        // isAuthenticated: state.auth.token !== null   -> login.token !== null
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onProductAdded: (productName) => dispatch(actions.addProduct(productName)),
+        onProductRemoved: (productName) => dispatch(actions.removeProduct(productName)),
+        onInitProducts: () => dispatch(actions.initProducts()),
+        onInitPurchase: () => dispatch(actions.purchaseInit()),
+        // onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PizzaCreator);

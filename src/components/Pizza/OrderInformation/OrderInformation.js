@@ -3,7 +3,7 @@ import React from 'react';
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 
-const ordery = (props) => {
+const orderInformation = (props) => {
     const productSummary = Object.keys(props.products)
         .map( prodKey => {
             return (
@@ -20,11 +20,11 @@ const ordery = (props) => {
                 {productSummary}
             </ul>
             <p><strong>Total Price: {props.price} lv</strong></p>
-            <p>Finish order?</p>
+            <p>Do you finish your order?</p>
             <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
             <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
         </Aux>
     );  
 };
 
-export default ordery;
+export default orderInformation;
