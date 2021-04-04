@@ -19,12 +19,13 @@ class RegisterControl extends Component {
                 value: '',
                 validation: {
                     required: true,
+                    isName: true,
                     minLengthName: 2,
                     maxLengthName: 20
                 },
                 valid: false,
                 touched: false,
-                error: 'The Name must be minimum 2 characters and maximum 20 characters!'
+                error: 'The Name must be contain only letters, minimum 2 and maximum 20!'
             },
             email: {
                 elementType: 'input',
@@ -50,11 +51,12 @@ class RegisterControl extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6,
-                    maxLength: 20
+                    minLengthPassword: 6,
+                    maxLengthPassword: 20
                 },
                 valid: false,
                 touched: false,
+                password: false,
                 error: 'The Password must be minimum 6 characters and maximum 20 characters!'
             },
             repeatpassword: {
@@ -66,16 +68,14 @@ class RegisterControl extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLengthPassword: 6,
-                    maxLengthPassword: 20
+                    matchPasswords: true
                 },
                 valid: false,
                 touched: false,
-                repPassword: false,
                 error: 'Password don\'t match!'
             }  
         },
-        isSignup: true     
+        isSignup: true   
     }
 
     checkValidity(value, rules) {
@@ -113,15 +113,16 @@ class RegisterControl extends Component {
             isValid = pattern.test(value) && isValid
         } 
 
-        if (rules.repPassword) {
+        if (rules.matchPasswords) {
             repeatPassword = value;
             isValid = (password === repeatPassword) && isValid;
         }
 
         if (rules.isName) {
-            const pattern = !/[^a-zA-Z]/;
+            const pattern = /^[A-Za-z]+$/;
             isValid = pattern.test(value) && isValid
         }
+
         return isValid;
     }
 
@@ -147,6 +148,8 @@ class RegisterControl extends Component {
         }
         this.props.addUser(user)
         this.signinHandler()
+        
+        
         // console.log('Users: ', this.props.users)
     }
 

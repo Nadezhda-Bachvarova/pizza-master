@@ -4,9 +4,9 @@ import { updateObject } from '../utility';
 const initialState = {
     products: null,
     totalPrice: 5,
-    // purchasable: false,
-    // purchasing: false,
-    // loading: false,
+    purchasable: false,
+    purchasing: false,
+    loading: false,
     error: false,
     creating: false
 }

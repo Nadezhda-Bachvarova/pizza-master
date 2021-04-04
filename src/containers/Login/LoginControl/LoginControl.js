@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 import classes from './LoginControl.module.css';
-// import * as actions from '../../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 
-// import Spinner from '../../../components/UI/Spinner/Spinner';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 
 
@@ -45,6 +45,12 @@ class LoginControl extends Component {
         }     
     }
 
+    // componentDidMount() {
+    //     if (!this.props.creatingPizza) {
+    //         this.props.onSetLoginRedirectPath();
+    //     }
+    // }
+
     checkValidity(value, rules) {
         let isValid = true;
 
@@ -83,7 +89,7 @@ class LoginControl extends Component {
                     this.props.history.push('/')
                 }
             })
-        }
+        } alert('Invalid Credentials!')
         
     };       
 
@@ -107,9 +113,22 @@ class LoginControl extends Component {
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>    
         ));
 
-        // if (this.props.loading) {
-        //     form = <Spinner />
-        // }
+        if (this.props.loading) {
+            form = <Spinner />
+        }
+
+        let errorMessage = null;
+
+        if (this.props.error) {
+            errorMessage = (
+                <p>{this.props.error.message}</p>
+            );
+        }
+
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to="/checkout"/>
+        }
 
         return (
             <div className={classes.LoginControl}>
@@ -128,12 +147,17 @@ class LoginControl extends Component {
 const mapStateToProps = state => {
     return {
         users: state.users,
-        isAutenticated: state.login.isAutenticated
+        isAutenticated: state.login.isAutenticated,
+        loading: state.login.loading,
+        error: state.login.error,
+        creatingPizza: state.pizzaCreator.creating
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        onLogin: ( email, password ) => dispatch( actions.login( email, password) ),
+        onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
     }
 }
 

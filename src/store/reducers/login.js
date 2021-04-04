@@ -6,7 +6,7 @@ const initialState = {
     password: null,
     error: null,
     loading: false, 
-    logRedirectPath: '',
+    logRedirectPath: null,
     login: false,
     isAuthenticated: false
 };
@@ -22,6 +22,7 @@ const loginSuccess = (state, action) => {
         error: null,
         loading: false,
         login: true,
+        logRedirectPath: '/',
         isAuthenticated: true
     });
 };
