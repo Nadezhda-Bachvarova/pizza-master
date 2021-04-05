@@ -9,6 +9,7 @@
 }
 
 .LoginControl h3 {
+    font-weight: bold;
     text-decoration: underline #690606;
     text-underline-offset: 0.3rem;
 }

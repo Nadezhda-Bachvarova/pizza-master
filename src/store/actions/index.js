@@ -9,9 +9,6 @@ export {
     setRegisterRedirectPath
 } from './register';
 export {
-    addUser
-} from './users';
-export {
     addProduct,
     removeProduct,
     initProducts

@@ -12,8 +12,7 @@ export const loginSuccess = (inputEmail, inputPassword) => {
         type: actionTypes.LOGIN_SUCCESS,
         email: inputEmail,
         password: inputPassword,
-        login: true,
-        isAuthenticated: true
+        login: true
     };
 };
 

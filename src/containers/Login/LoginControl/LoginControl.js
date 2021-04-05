@@ -79,19 +79,20 @@ class LoginControl extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-
+        console.log('Users:', this.props.users)
         let users = this.props.users
-        if (users) {
-            users.forEach(user => {
+        users.forEach(user => {
+            try {
                 if(user.email === this.state.user.email.value && user.password === this.state.user.password.value) {
                     localStorage.setItem('user', JSON.stringify(user))
-                    // set isAutenticated = true !!!
+    
                     this.props.history.push('/')
                 }
-            })
-        } alert('Invalid Credentials!')
-        
-    };       
+            } catch {
+                alert ('Invalid Credentials!')
+            }  
+        })    
+    };      
 
     render() {
         const formElementsArray = [];
@@ -113,32 +114,18 @@ class LoginControl extends Component {
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>    
         ));
 
-        if (this.props.loading) {
-            form = <Spinner />
-        }
-
-        let errorMessage = null;
-
-        if (this.props.error) {
-            errorMessage = (
-                <p>{this.props.error.message}</p>
-            );
-        }
-
-        let authRedirect = null;
-        if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to="/checkout"/>
-        }
+        // if (this.props.loading) {
+        //     form = <Spinner />
+        // }
 
         return (
             <div className={classes.LoginControl}>
-            <button className={classes.Back} onClick={() => {this.props.history.push('/')}}>Back</button>
                 <form onSubmit={this.submitHandler}>
                     <h3>LOGIN</h3>
                         {form}
                     <button>LOGIN</button>
                 </form>
-                    <button onClick={() => {this.props.history.push('/register')}}>REGISTER</button>
+                    <button className={classes.Signin} onClick={() => {this.props.history.push('/register');}}>Go Back</button>
             </div>
         );
     }
@@ -146,18 +133,12 @@ class LoginControl extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.users,
-        isAutenticated: state.login.isAutenticated,
-        loading: state.login.loading,
-        error: state.login.error,
-        creatingPizza: state.pizzaCreator.creating
+        users: state.users.users
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onLogin: ( email, password ) => dispatch( actions.login( email, password) ),
-        onSetLoginRedirectPath: () => dispatch(actions.setLoginRedirectPath('/'))
+    return { 
     }
 }
 

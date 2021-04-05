@@ -106,7 +106,7 @@ class ContactForm extends Component {
             price: this.props.price,
             orderData: formData
         }
-        this.props.onOrderPizza(order, this.props.token);  
+        this.props.onOrderPizza(order);  
     }
 
     checkValidity(value, rules) {
@@ -205,7 +205,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderPizza: (orderData, token) => dispatch(actions.purchasePizza(orderData, token))
+        onOrderPizza: (orderData) => dispatch(actions.purchasePizza(orderData))
     };
 };
 

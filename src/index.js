@@ -12,17 +12,19 @@ import pizzaCreatorReducer from './store/reducers/pizzaCreator';
 import orderReducer from './store/reducers/order';
 import registerReducer from './store/reducers/register';
 import loginReducer from './store/reducers/login';
+import usersReducer from './store/reducers/users';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReduser = combineReducers({
+const rootReducer = combineReducers({
     pizzaCreator: pizzaCreatorReducer,
     order: orderReducer,
     register: registerReducer,
-    login: loginReducer
+    login: loginReducer,
+    users: usersReducer,
 });
 
-const store = createStore(rootReduser, composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 

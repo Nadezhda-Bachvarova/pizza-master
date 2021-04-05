@@ -1,10 +1,14 @@
 import { updateObject } from '../utility';
 
+const initialState = {
+    users: []
+}
+
 const addUser = (state, action) => {
-    return [
+    return {
         ...state,
-        action.user
-    ]
+        users: [...state.users, action.user]
+    } 
 };
 
 const setUserName = (state, action) => {
@@ -24,8 +28,7 @@ const logoutUser = (state, action) => {
     return updateObject(state, action)
 }
 
-
-const reducer = (state = [], action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_USER': return addUser(state, action);
         case 'LOGIN_USER': return loginUser(state, action);

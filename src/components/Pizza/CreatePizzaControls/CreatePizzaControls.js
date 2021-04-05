@@ -24,7 +24,7 @@ const createPizzaControls = (props) => (
         <button 
             className={classes.OrderButton}
             disabled={!props.purchasable}
-            onClick={props.ordered}>{props.isAuth ? 'SEND YOUR ORDER' : 'LOGIN TO ORDER'}</button>
+            onClick={props.ordered}>{props.isLogin ? 'SEND YOUR ORDER' : 'LOGIN TO ORDER'}</button>
     </div>
 );
 

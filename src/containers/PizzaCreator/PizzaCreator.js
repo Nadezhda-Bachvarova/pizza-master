@@ -70,7 +70,7 @@ class PizzaCreator extends Component {
                         disabled={disabledInfo}
                         purchasable={this.updatePurchaseState(this.props.products)}
                         ordered={this.purchaseHandler}
-                        isAuth={this.props.isAuthenticated}
+                        isLogin={this.props.login}
                         price={this.props.price} />
                 </Aux>
             );
@@ -97,7 +97,7 @@ const mapStateToProps = state => {
         products: state.pizzaCreator.products,
         price: state.pizzaCreator.totalPrice,
         error: state.pizzaCreator.error,
-        isAuthenticated: state.login.isAuthenticated  
+        login: state.login.login  
     };
 }
 

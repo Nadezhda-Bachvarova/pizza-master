@@ -8,6 +8,7 @@ import RegisterControl from './containers/Register/RegisterControl/RegisterContr
 import LoginControl from './containers/Login/LoginControl/LoginControl';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
+import Logout from './containers/Login/Logout';
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -25,11 +26,12 @@ class App extends Component {
       </Switch>
     );
 
-    if ( this.props.isAuthenticated ) {
+    if ( this.props.login ) {
       routes = (
         <Switch>
           <Route path="/checkout" component={Checkout}/>
           <Route path="/orders" component={Orders}/>
+          <Route path="/" component={Logout}/>
           <Route exact path="/" component={PizzaCreator}/>
           <Redirect to="/" />
         </Switch>
@@ -47,7 +49,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.login.isAuthenticated
+    login: state.login.login
   };
 };
 

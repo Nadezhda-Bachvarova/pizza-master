@@ -1,0 +1,23 @@
+0000000000000000000000000000000000000000 3b353abf593c14c5af03761c4770d94f72a6df2e Nadezhda <nadezhda_bachvarova@abv.bg> 1616511409 +0200	commit (initial): init
+3b353abf593c14c5af03761c4770d94f72a6df2e 3b353abf593c14c5af03761c4770d94f72a6df2e Nadezhda <nadezhda_bachvarova@abv.bg> 1616511870 +0200	Branch: renamed refs/heads/master to refs/heads/master
+3b353abf593c14c5af03761c4770d94f72a6df2e 3b353abf593c14c5af03761c4770d94f72a6df2e Nadezhda <nadezhda_bachvarova@abv.bg> 1616511885 +0200	Branch: renamed refs/heads/master to refs/heads/main
+3b353abf593c14c5af03761c4770d94f72a6df2e 3b353abf593c14c5af03761c4770d94f72a6df2e Nadezhda <nadezhda_bachvarova@abv.bg> 1616512275 +0200	Branch: renamed refs/heads/main to refs/heads/main
+3b353abf593c14c5af03761c4770d94f72a6df2e 3b353abf593c14c5af03761c4770d94f72a6df2e Nadezhda <nadezhda_bachvarova@abv.bg> 1616512401 +0200	Branch: renamed refs/heads/main to refs/heads/main
+3b353abf593c14c5af03761c4770d94f72a6df2e 3b353abf593c14c5af03761c4770d94f72a6df2e Nadezhda <nadezhda_bachvarova@abv.bg> 1616512559 +0200	Branch: renamed refs/heads/main to refs/heads/main
+3b353abf593c14c5af03761c4770d94f72a6df2e acbfeef8cd53ff85a0dc90471172d74bfc9b52b8 Nadezhda <nadezhda_bachvarova@abv.bg> 1616573356 +0200	commit: update component HomePage
+acbfeef8cd53ff85a0dc90471172d74bfc9b52b8 492c7aa803453062be4912577cfc111833c3e9db Nadezhda <nadezhda_bachvarova@abv.bg> 1616614424 +0200	commit: update components
+492c7aa803453062be4912577cfc111833c3e9db bcffccf4673680655814f0932c298e83a49b5c99 Nadezhda <nadezhda_bachvarova@abv.bg> 1616615255 +0200	commit: package
+bcffccf4673680655814f0932c298e83a49b5c99 63d41054f0d37f5c4ae15cd189981e07a0214879 Nadezhda <nadezhda_bachvarova@abv.bg> 1616696377 +0200	commit: Layout Pizzad Button Button component
+63d41054f0d37f5c4ae15cd189981e07a0214879 7dee55e9f71b6d8795fa730ca2a91d0c9be51453 Nadezhda <nadezhda_bachvarova@abv.bg> 1617019840 +0300	commit: navigationItems css update
+7dee55e9f71b6d8795fa730ca2a91d0c9be51453 b69fe49ff85d5ec2dce8ee718e3c6fee0c310a11 Nadezhda <nadezhda_bachvarova@abv.bg> 1617019959 +0300	commit: fix dynamic pizza element
+b69fe49ff85d5ec2dce8ee718e3c6fee0c310a11 1547b98ec71c240eb399243b67867d36a010eeec Nadezhda <nadezhda_bachvarova@abv.bg> 1617198098 +0300	commit: provided error-handler for components
+1547b98ec71c240eb399243b67867d36a010eeec a832e5ef782974bc95e95ed421dea1f7b0f87b1f Nadezhda <nadezhda_bachvarova@abv.bg> 1617198403 +0300	commit: add library that helps us make 'http' requests to external resources
+a832e5ef782974bc95e95ed421dea1f7b0f87b1f f64de9039b6cf499319c6b5724a4136ed42b5b2f Nadezhda <nadezhda_bachvarova@abv.bg> 1617199056 +0300	commit: updatecomponents
+f64de9039b6cf499319c6b5724a4136ed42b5b2f 63f3d90f5143e31b838457a7042f79382a5e43b6 Nadezhda <nadezhda_bachvarova@abv.bg> 1617199645 +0300	commit (merge): update components
+63f3d90f5143e31b838457a7042f79382a5e43b6 3041f8c16cbe0d04129e888623a9496a4630a7e8 Nadezhda <nadezhda_bachvarova@abv.bg> 1617202241 +0300	commit: fix state issue
+3041f8c16cbe0d04129e888623a9496a4630a7e8 e4772bd6e138b290f4555e32290cd4b03c688233 Nadezhda <nadezhda_bachvarova@abv.bg> 1617356678 +0300	commit: updateCheckout and CheckoutSummary
+e4772bd6e138b290f4555e32290cd4b03c688233 70ee1864ecd92e010a34c4e6d319a894003a1656 Nadezhda <nadezhda_bachvarova@abv.bg> 1617551472 +0300	commit: project docimentation
+70ee1864ecd92e010a34c4e6d319a894003a1656 6b5a3778557159ebfeefe1ee99e8854a6341bd33 Nadezhda <nadezhda_bachvarova@abv.bg> 1617554129 +0300	commit: project documentation
+6b5a3778557159ebfeefe1ee99e8854a6341bd33 9c1db18f90aabe82b118bfc9249d4ef97487d8e8 Nadezhda <nadezhda_bachvarova@abv.bg> 1617554230 +0300	commit: Add Redux to a React App
+9c1db18f90aabe82b118bfc9249d4ef97487d8e8 efc2fad95c4736c4febd1c93d569e1bd86b7ad1d Nadezhda <nadezhda_bachvarova@abv.bg> 1617567812 +0300	commit: update with redux
+efc2fad95c4736c4febd1c93d569e1bd86b7ad1d 211bd456840ef634373fb09c2a5f21192f094da4 Nadezhda <nadezhda_bachvarova@abv.bg> 1617575387 +0300	commit: update conditions

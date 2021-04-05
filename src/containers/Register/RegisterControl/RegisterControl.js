@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import classes from './RegisterControl.module.css';
 import Input from '../../../components/UI/Input/Input';
 // import Spinner from '../../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
-import * as actions from '../../../store/actions/index';
+import { addUser } from '../../../store/actions/users';
 
 
 class RegisterControl extends Component {
@@ -68,7 +67,7 @@ class RegisterControl extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    matchPasswords: true
+                    repPassword: true,
                 },
                 valid: false,
                 touched: false,
@@ -86,43 +85,34 @@ class RegisterControl extends Component {
         if (!rules) {
             return true;
         }
-
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
-
         if (rules.minLengthName) {
             isValid = value.length >= rules.minLengthName && isValid;
         }
-        
-        if (rules.maxLengthName) {
-            isValid = value.length <= rules.maxLengthName && isValid;
-        }
-
-        if (rules.minLengthPassword) {
-            password = value;
-            isValid = value.length >= rules.minLengthPassword && isValid;
-        }
-
-        if (rules.maxLengthPassword) {
-            isValid = value.length <= rules.maxLengthPassword && isValid;
-        }
-
-        if (rules.isEmail) {
-            const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            isValid = pattern.test(value) && isValid
-        } 
-
-        if (rules.matchPasswords) {
-            repeatPassword = value;
-            isValid = (password === repeatPassword) && isValid;
-        }
-
         if (rules.isName) {
             const pattern = /^[A-Za-z]+$/;
             isValid = pattern.test(value) && isValid
         }
-
+        if (rules.maxLengthName) {
+            isValid = value.length <= rules.maxLengthName && isValid;
+        }
+        if (rules.isEmail) {
+            const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            isValid = pattern.test(value) && isValid
+        } 
+        if (rules.minLengthPassword) {
+            password = value;
+            isValid = value.length >= rules.minLengthPassword && isValid;
+        } 
+        if (rules.maxLengthPassword) {
+            isValid = value.length <= rules.maxLengthPassword && isValid;
+        }
+        if (rules.repPassword) {
+            repeatPassword = value;
+            isValid = (password === repeatPassword) && isValid;
+        }
         return isValid;
     }
 
@@ -148,9 +138,6 @@ class RegisterControl extends Component {
         }
         this.props.addUser(user)
         this.signinHandler()
-        
-        
-        // console.log('Users: ', this.props.users)
     }
 
     signinHandler = () => {
@@ -182,9 +169,9 @@ class RegisterControl extends Component {
                 <form onSubmit={this.submitHandler}>
                     <h3>REGISTER ACCOUNT</h3>
                     {form}
-                    <button className={classes.Signup}>Confirm</button>
+                    <button className={classes.Signup}>SIGN UP</button>
                 </form>
-                    <button className={classes.Signin} onClick={this.signinHandler}>LOGIN</button>
+                    <button className={classes.Signin} onClick={this.signinHandler}>SIGN IN</button>
             </div>
         )
     };
@@ -198,7 +185,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addUser: user => dispatch(actions.addUser(user))
+        addUser: user => dispatch(addUser(user))
     }
 }
 

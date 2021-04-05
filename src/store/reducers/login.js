@@ -6,9 +6,8 @@ const initialState = {
     password: null,
     error: null,
     loading: false, 
-    logRedirectPath: null,
-    login: false,
-    isAuthenticated: false
+    logRedirectPath: '/',
+    login: false
 };
 
 const loginStart = (state, action) => {
@@ -21,9 +20,7 @@ const loginSuccess = (state, action) => {
         password: action.password,
         error: null,
         loading: false,
-        login: true,
-        logRedirectPath: '/',
-        isAuthenticated: true
+        login: true
     });
 };
 
