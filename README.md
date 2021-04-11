@@ -34,6 +34,7 @@ When the custom pizza is done, the user have a choice to be continued with previ
 The ContactData component is with custom validation too. Data for ContactData and order content are sent in Realtime Database, Firebase.
 
 ## 1.2. Public part (accessible without authentication).
-When user is wihout authentication could see and create custom pizza /PizzaCreator.js/ with chosen products /PizzaProduct.js/, 
-but can't make order and can't send order.
-When user try to creat a animated pizza is with restriction - redirect to Authentication form.
+Part of public access is **AboutUs** component with short information and funny animation.
+When user is wihout authentication could see and create custom pizza **PizzaCreator** with optional products **PizzaProduct**, 
+but can't make order and can't send order. Every component have custom validation.
+When user try to creat a animated pizza is with restriction - redirect to **Authentication** form.
