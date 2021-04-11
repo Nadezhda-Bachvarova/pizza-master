@@ -8,7 +8,8 @@ const initialState = {
     purchasing: false,
     loading: false,
     error: false,
-    creating: false
+    creating: false,
+    building: false
 }
 
 const PRODUCT_PRICES = {
@@ -19,30 +20,16 @@ const PRODUCT_PRICES = {
 };
 
 const addProduct = (state, action) => {
-    const updatedProduct = { [action.productName]: state.products[action.productName] + 1 }
-    const updatedProducts = updateObject( state.products, updatedProduct );
-    const updatedState = {
-        products: updatedProducts,
-        totalPrice: state.totalPrice + PRODUCT_PRICES[action.productName],
-        creating: true
-    }
-    return updateObject( state, updatedState );
+        const updatedProduct = { [action.productName]: state.products[action.productName] + 1 }
+        const updatedProducts = updateObject( state.products, updatedProduct );
+        const updatedState = {
+            products: updatedProducts,
+            totalPrice: state.totalPrice + PRODUCT_PRICES[action.productName],
+            creating: true,
+            building: true
+        }  
+        return updateObject( state, updatedState );
 };
-
-// addProductHandler = (type) => {
-//     const oldCount = this.state.products[type];
-//     if (this.state.products[type] === 0) {
-//         const updatedCount = oldCount + 1;
-//         const updatedProducts = {
-//             ...this.state.products
-//         };
-//         updatedProducts[type] = updatedCount;
-//         const oldPrice = this.state.totalPrice;
-//         const newPrice = oldPrice + PRODUCT_PRICES[type];
-//         this.setState({ totalPrice: newPrice, products: updatedProducts });
-//         this.updatePurchaseState(updatedProducts);
-//     }
-// }
 
 const removeProduct = (state, action) => {
     const updatedProduct = { [action.productName]: state.products[action.productName] - 1 }

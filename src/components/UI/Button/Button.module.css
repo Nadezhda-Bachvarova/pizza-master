@@ -5,14 +5,15 @@
     outline: none;
     cursor: pointer;
     font: inherit;
-    padding: 10px;
     margin: 10px;
     font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 12px;
 }
 
 .Button:first-of-type {
-    margin-left: 0;
-    padding-left: 0;
+    margin-left: 10px auto;
+    padding-left: 10px auto;
 }
 
 .Button:disabled {
@@ -26,4 +27,22 @@
 
 .Danger {
     color: #944317;
+}
+
+.Auth {
+    background-color: #bd4c4c;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 12px;
+    border-color: #bd4c4c;
+    margin: 10px auto;
+}
+
+.AuthCurrent {
+    background-color: #792929;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 12px;
+    border-color: #bd4c4c;
+    margin: 10px auto;
 }

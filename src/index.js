@@ -10,18 +10,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import pizzaCreatorReducer from './store/reducers/pizzaCreator';
 import orderReducer from './store/reducers/order';
-import registerReducer from './store/reducers/register';
-import loginReducer from './store/reducers/login';
-import usersReducer from './store/reducers/users';
+import authReducer from './store/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     pizzaCreator: pizzaCreatorReducer,
     order: orderReducer,
-    register: registerReducer,
-    login: loginReducer,
-    users: usersReducer,
+    auth: authReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

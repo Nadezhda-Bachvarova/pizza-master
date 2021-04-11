@@ -35,8 +35,8 @@ class PizzaCreator extends Component {
         if (this.props.isAuthenticated) {
             this.setState( { purchasing: true } );
         } else {
-            this.props.onSetLoginRedirectPath('/checkout');
-            this.props.history.push('/login');
+            this.props.onSetAuthRedirectPath('/checkout');
+            this.props.history.push('/auth');
         }
     }
 
@@ -51,7 +51,7 @@ class PizzaCreator extends Component {
 
     render() {
         const disabledInfo = {
-            ...this.state.products
+            ...this.state.productsAmount
         };
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
@@ -60,22 +60,22 @@ class PizzaCreator extends Component {
         let order = null;
         let pizza = this.state.error ? <p>Products can't be loaded!</p> : <Spinner/>
 
-        if (this.props.products) {
+        if (this.props.productsAmount) {
             pizza = (
                 <Aux>
-                    <Pizza products={this.props.products} />
+                    <Pizza products={this.props.productsAmount} />
                     <CreatePizzaControls
                         ingredientAdded={this.props.onProductAdded}
                         ingredientRemoved={this.props.onProductRemoved}
                         disabled={disabledInfo}
-                        purchasable={this.updatePurchaseState(this.props.products)}
+                        purchasable={this.updatePurchaseState(this.props.productsAmount)}
                         ordered={this.purchaseHandler}
-                        isLogin={this.props.login}
+                        isAuth={this.props.isAuthenticated}
                         price={this.props.price} />
                 </Aux>
             );
             order = <OrderInformation
-                products={this.props.products}
+                products={this.props.productsAmount}
                 price={this.props.price.toFixed(2)}
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler} />
@@ -94,10 +94,10 @@ class PizzaCreator extends Component {
 
 const mapStateToProps = state => {
     return {
-        products: state.pizzaCreator.products,
+        productsAmount: state.pizzaCreator.products,
         price: state.pizzaCreator.totalPrice,
         error: state.pizzaCreator.error,
-        login: state.login.login  
+        isAuthenticated: state.auth.token !== null 
     };
 }
 
@@ -107,7 +107,7 @@ const mapDispatchToProps = dispatch => {
         onProductRemoved: (productName) => dispatch(actions.removeProduct(productName)),
         onInitProducts: () => dispatch(actions.initProducts()),
         onInitPurchase: () => dispatch(actions.purchaseInit()),
-        onSetLoginRedirectPath: (path) => dispatch(actions.setLoginRedirectPath(path))
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     }
 }
 

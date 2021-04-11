@@ -30,10 +30,10 @@
     margin: 10px;
 }
 
-.Signup {
-    background-color: #bd4c4c;
+.AuthCurrent {
+    background-color: #792929;
 }
 
-.Signin {
-    background-color: #a33333;
+.Auth {
+    background-color: #bd4c4c;
 }

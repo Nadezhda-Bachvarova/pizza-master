@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
@@ -22,7 +23,7 @@ const sideDrawer = (props) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems isAuthenticated={props.isAuth} />
+                    <NavigationItems isAuthenticated={props.isAuth}/>
                 </nav>
             </div>
         </Aux>

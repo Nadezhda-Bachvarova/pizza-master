@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import classes from './Toolbar.module.css';
 import Logo from '../Logo/Logo';
@@ -13,7 +14,7 @@ const toolbar = (props) => (
             <Logo />
         </div>
         <nav className={classes.DesktopOnly}> 
-            <NavigationItems isAuthenticated={props.isAuth}/>
+        <NavigationItems isAuthenticated={props.isAuth} />
         </nav>
     </header>
 );

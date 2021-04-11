@@ -1,31 +1,17 @@
-import React, { Component } from 'react';
-import classes from './RegisterControl.module.css';
-import Input from '../../../components/UI/Input/Input';
-// import Spinner from '../../../components/UI/Spinner/Spinner';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { addUser } from '../../../store/actions/users';
+import { Redirect } from 'react-router-dom';
+
+import Button from '../../../components/UI/Button/Button';
+import classes from './AuthControl.module.css';
+import Input from '../../../components/UI/Input/Input';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import * as actions from '../../../store/actions/index';
 
 
-class RegisterControl extends Component {
+class AuthControl extends Component {
     state = {
         user: {
-            name: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Name'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    isName: true,
-                    minLengthName: 2,
-                    maxLengthName: 20
-                },
-                valid: false,
-                touched: false,
-                error: 'The Name must be contain only letters, minimum 2 and maximum 20!'
-            },
             email: {
                 elementType: 'input',
                 elementConfig: {
@@ -57,46 +43,21 @@ class RegisterControl extends Component {
                 touched: false,
                 password: false,
                 error: 'The Password must be minimum 6 characters and maximum 20 characters!'
-            },
-            repeatpassword: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'password',
-                    placeholder: 'Repeat Password'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    repPassword: true,
-                },
-                valid: false,
-                touched: false,
-                error: 'Password don\'t match!'
-            }  
+            }, 
         },
-        isSignup: true   
+        isSignup: true,
+        massage: null   
     }
 
     checkValidity(value, rules) {
         let isValid = true;
         let password = null;
-        let repeatPassword = null;
 
         if (!rules) {
             return true;
         }
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
-        }
-        if (rules.minLengthName) {
-            isValid = value.length >= rules.minLengthName && isValid;
-        }
-        if (rules.isName) {
-            const pattern = /^[A-Za-z]+$/;
-            isValid = pattern.test(value) && isValid
-        }
-        if (rules.maxLengthName) {
-            isValid = value.length <= rules.maxLengthName && isValid;
         }
         if (rules.isEmail) {
             const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -109,11 +70,13 @@ class RegisterControl extends Component {
         if (rules.maxLengthPassword) {
             isValid = value.length <= rules.maxLengthPassword && isValid;
         }
-        if (rules.repPassword) {
-            repeatPassword = value;
-            isValid = (password === repeatPassword) && isValid;
-        }
         return isValid;
+    }
+
+    componentDidMount() {
+        if (!this.props.pizzaCreating && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthRedirectPath();
+        }
     }
 
     inputChangedHandler = ( event, controlName ) => {
@@ -131,17 +94,13 @@ class RegisterControl extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        let user = {
-            name: this.state.user.name.value,
-            email: this.state.user.email.value,
-            password: this.state.user.password.value
-        }
-        this.props.addUser(user)
-        this.signinHandler()
+        this.props.onAuth( this.state.user.email.value, this.state.user.password.value, this.state.isSignup ); 
     }
 
-    signinHandler = () => {
-        this.props.history.push('/login');
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {isSignup: !prevState.isSignup};
+        });
     }
 
     render() {
@@ -164,14 +123,46 @@ class RegisterControl extends Component {
                 changed={(event) => this.inputChangedHandler(event, formElement.id)}/>    
         ));
 
+        if (this.props.loading) {
+            form = <Spinner />
+        }
+
+        let errorMessage = null;
+        if (this.props.error) {
+            errorMessage = (
+                <p>{this.props.error.message}</p>
+            );
+        }
+
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={this.props.authRedirectPath}/>
+        }
+
+        let title =  null;
+        let label = null;
+        let buttonText = null;
+        if (this.state.isSignup) {
+            title = (<h3>REGISTER ACCOUNT</h3>)
+            label = ('You have registration yet?')
+            buttonText = ('SIGNIN')
+        } else {
+            title = (<h3>SIGNIN</h3>)
+            label = ('You don\'t have registration? Let\'s do it.')
+            buttonText = ('SIGNUP')
+        }
+
         return (
             <div className={classes.RegisterControl}>
+                {authRedirect}
+                {errorMessage}
+                {title}
                 <form onSubmit={this.submitHandler}>
-                    <h3>REGISTER ACCOUNT</h3>
                     {form}
-                    <button className={classes.Signup}>SIGN UP</button>
+                    <Button btnType="AuthCurrent">SUBMIT</Button>
                 </form>
-                    <button className={classes.Signin} onClick={this.signinHandler}>SIGN IN</button>
+                    <p>{label} <Button btnType="Auth" clicked={this.switchAuthModeHandler}>{buttonText}</Button></p>
+                    
             </div>
         )
     };
@@ -179,14 +170,19 @@ class RegisterControl extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.users
-    }
-}
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        pizzaCreating: state.pizzaCreator.building,
+        authRedirectPath: state.auth.authRedirectPath
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
-        addUser: user => dispatch(addUser(user))
-    }
-}
+        onAuth: ( email, password, isSignup ) => dispatch( actions.auth( email, password, isSignup ) ),
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+    };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterControl);
+export default connect(mapStateToProps, mapDispatchToProps) (AuthControl);

@@ -102,11 +102,12 @@ class ContactForm extends Component {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
         }
         const order = {
-            products: this.props.products,
+            products: this.props.productsAmount,
             price: this.props.price,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId
         }
-        this.props.onOrderPizza(order);  
+        this.props.onOrderPizza(order, this.props.token);  
     }
 
     checkValidity(value, rules) {
@@ -169,7 +170,7 @@ class ContactForm extends Component {
         let form = (
             <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(formElement => (
-                    <Input 
+                <Input 
                     key={formElement.id}
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
@@ -182,7 +183,7 @@ class ContactForm extends Component {
                 <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
-        if ( this.state.loading ) {
+        if ( this.props.loading ) {
             form = <Spinner />;
         }
         return (
@@ -196,16 +197,17 @@ class ContactForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        products: state.pizzaCreator.products,
+        productsAmount: state.pizzaCreator.products,
         price: state.pizzaCreator.totalPrice,
         loading: state.order.loading,
-        token: state.login.token
+        token: state.auth.token,
+        userId: state.auth.userId
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderPizza: (orderData) => dispatch(actions.purchasePizza(orderData))
+        onOrderPizza: (orderData, token) => dispatch(actions.purchasePizza(orderData, token))
     };
 };
 

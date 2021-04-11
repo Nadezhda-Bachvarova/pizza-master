@@ -1,13 +1,9 @@
-export { 
-    login,
-    logout,
-    setLoginRedirectPath,
-    loginCheckState
-} from './login';
 export {
-    register,
-    setRegisterRedirectPath
-} from './register';
+    auth,
+    logout,
+    authCheckState,
+    setAuthRedirectPath
+} from './auth';
 export {
     addProduct,
     removeProduct,
@@ -18,3 +14,4 @@ export {
     purchaseInit,
     fetchOrders
 } from './order';
+
