@@ -8,13 +8,14 @@ import AuthControl from './containers/Authentication/AuthControl/AuthControl';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 import Logout from './containers/Authentication/Logout/Logout';
-// import * as actions from './store/actions/index';
+import AboutUs from './components/AboutUs/AboutUs';
 
 class App extends Component {
 
   render () {
     let routes = (
       <Switch>
+        <Route path="/about" component={AboutUs}/>
         <Route path="/auth" component={AuthControl}/>
         <Route exact path="/" component={PizzaCreator}/>
         <Redirect to="/" />
